@@ -422,6 +422,37 @@ http://127.0.0.1:8000/db-test
   ]
 }
 ```
+#### 5-6-9 Save and push changes
+After testing that the connection works, save the changes with Git
+```bash
+git status
+git add .gitignore README.MD app\database.py app\main.py requirements.txt .env.example
+git commit -m "Connect FastAPI to SQLite database"
+git push -u origin feature/connect-sqlite
+git checkout main
+git pull origin main
+```
 
+### 5-7 Create GET /products Route
+- Create a new branch
+```bash
+git checkout -b feature/products-route
+```
+
+- Update app/routes/products.py
+```text
+router = APIRouter(prefix="/products", tags=["Products"])
+```
+- Update app/main.py
+```text
+from app.routes import products
+app.include_router(products.router)
+```
+
+- Run and test
+```bash
+uvicorn app.main:app --reload
+http://127.0.0.1:8000/products/
+```
 ---
 ### 6- Frontend setup
