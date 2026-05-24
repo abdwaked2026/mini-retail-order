@@ -348,5 +348,15 @@ http://127.0.0.1:8000
 ```text
 http://127.0.0.1:8000/docs
 ```
+### 5-5 Save and Push Backend Setup
+
+After testing that the FastAPI server works, save the backend setup changes with Git.
+
+```bash
+git add app\main.py app\database.py app\models.py app\routes\products.py app\routes\customers.py app\routes\orders.py requirements.txt README.MD
+git commit -m "Set up FastAPI backend starter"
+git push -u origin feature/backend-setup
+```
+
 ---
 ### 6- Frontend setup
