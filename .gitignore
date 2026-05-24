@@ -10,3 +10,8 @@ __pycache__/
 
 # Mac system file, only appears on Mac
 .DS_Store 
+
+# Database file
+*.db
+*.sqlite
+*.sqlite3
