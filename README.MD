@@ -207,19 +207,16 @@ Database location: projectPath\mini-retail-order\database\mini_retail_order.db
 ```
 ### 4-6 Push Database Setup to GitHub
 - Add the database setup files to Git:
-
 ```bash
 git add .
 ```
 
 - Commit the database setup:
-
 ```bash
 git commit -m "Add SQLite database setup"
 ```
 
 - Push the database branch to GitHub:
-
 ```bash
 git push -u origin feature/database-setup
 ```
@@ -229,9 +226,7 @@ git push -u origin feature/database-setup
 ```bash
 git status
 ```
-
 You should see:
-
 ```text
 nothing to commit, working tree clean
 ```
