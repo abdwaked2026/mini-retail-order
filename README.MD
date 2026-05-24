@@ -206,6 +206,19 @@ Database location: projectPath\mini-retail-order\database\mini_retail_order.db
 *.sqlite3
 ```
 ### 4-6 Push Database Setup to GitHub
+
+- Check that you are on the database branch:
+
+```bash
+git status
+```
+
+You should see:
+
+```text
+On branch feature/database-setup
+```
+
 - Add the database setup files to Git:
 
 ```bash
@@ -235,8 +248,105 @@ You should see:
 ```text
 nothing to commit, working tree clean
 ```
----
-### 5- Backend setup
 
+---
+
+### 4-7 Update Local Main Branch After Merging Pull Request
+
+After you merge the pull request on GitHub, update your local `main` branch.
+
+- Switch back to the `main` branch:
+
+```bash
+git checkout main
+```
+
+- Update the local `main` branch to match GitHub:
+
+```bash
+git pull origin main
+```
+
+- Check that your local `main` branch is clean:
+
+```bash
+git status
+```
+
+You should see:
+
+```text
+On branch main
+Your branch is up to date with 'origin/main'.
+nothing to commit, working tree clean
+```
+
+---
+### 5- Backend Setup with FastAPI
+### 5-1 Backend GitHub Setup
+- Create a new Git branch for the backend setup:
+
+```bash
+git checkout -b feature/backend-setup
+git status
+```
+### 5-2 Install Backend Dependencies
+- Create the `requirements.txt` file:
+```bash
+type nul > requirements.txt
+```
+
+- Open `requirements.txt` and add these libraries:
+```text
+fastapi==0.136.1
+uvicorn==0.47.0
+```
+
+- Install the libraries from `requirements.txt`:
+```bash
+pip install -r requirements.txt
+```
+
+- Check that the libraries were installed:
+```bash
+pip list
+```
+
+### 5-3 Create Backend Files
+- Create the backend files:
+```bash
+type nul > app\database.py
+type nul > app\models.py
+```
+
+- Create the routes folder:
+```bash
+mkdir app\routes
+```
+
+- Create route files:
+```bash
+type nul > app\routes\products.py
+type nul > app\routes\customers.py
+type nul > app\routes\orders.py
+```
+---
+### 5-4 Run the FastAPI Backend
+> **Note:**  
+> The `app/main.py` file contains the starter FastAPI code. This code creates the API app and adds a basic `/` route to test that the backend is running.
+- Run the backend server:
+```bash
+uvicorn app.main:app --reload
+```
+
+- Open the API in the browser:
+```text
+http://127.0.0.1:8000
+```
+
+- Open the automatic API documentation:
+```text
+http://127.0.0.1:8000/docs
+```
 ---
 ### 6- Frontend setup
