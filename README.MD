@@ -356,6 +356,71 @@ After testing that the FastAPI server works, save the backend setup changes with
 git add app\main.py app\database.py app\models.py app\routes\products.py app\routes\customers.py app\routes\orders.py requirements.txt README.MD
 git commit -m "Set up FastAPI backend starter"
 git push -u origin feature/backend-setup
+git checkout main
+git pull origin main
+```
+
+### 5-6 Connect FastAPI with SQLite
+In this step, FastAPI is connected to the local SQLite database. The database path is stored in a `.env` file so the path can be changed later without editing the Python code.
+
+#### 5-6-1 Create a new branch
+
+Create a new branch for the SQLite connection work:
+
+```bash
+git checkout -b feature/connect-sqlite
+```
+
+#### 5-6-2 Create a .env file for database configuration
+This project uses a local `.env` file for configuration.
+
+- Create a `.env` file:
+```bash
+type nul > .env
+```
+- open `.env` and add
+```text
+DATABASE_PATH=database/mini_retail_order.db
+```
+#### 5-6-4 Create a .env.example file for GitHub
+```bash
+type nul > .env.example
+```
+- open `.env.example` and add
+```text
+DATABASE_PATH=database/mini_retail_order.db
+```
+- Add .env in .gitignore
+
+#### 5-6-5 Install python-dotenv
+- Add this package `python-dotenv==1.2.1` to requirements.txt 
+```bash
+pip install -r requirements.txt
+```
+
+#### 5-6-6 Update `app/database.py`
+Change the Database connection path
+
+#### 5-6-7 Add a database test route `app/main.py`
+This route checks that FastAPI can connect to SQLite and read the database tables.
+
+#### 5-6-8 Test the connection
+- Run the FastAPI server
+```bash
+uvicorn app.main:app --reload
+http://127.0.0.1:8000/db-test
+```
+- Expected result:
+```text
+{
+  "message": "Database connection successful",
+  "tables": [
+    "customers",
+    "sqlite_sequence",
+    "products",
+    "orders"
+  ]
+}
 ```
 
 ---
