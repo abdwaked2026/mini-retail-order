@@ -1,0 +1,12 @@
+# Virtual environment directory
+.venv/
+
+# Python compiled cache files
+__pycache__/
+*.pyc
+
+# for secret keys/passwords later
+.env
+
+# Mac system file, only appears on Mac
+.DS_Store 

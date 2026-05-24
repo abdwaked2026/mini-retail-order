@@ -1,0 +1,1 @@
+print("Mini Retail Order project is running!")
