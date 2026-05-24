@@ -439,11 +439,11 @@ git pull origin main
 git checkout -b feature/products-route
 ```
 
-- Update app/routes/products.py
+- Update `app/routes/products.py`
 ```text
 router = APIRouter(prefix="/products", tags=["Products"])
 ```
-- Update app/main.py
+- Update `app/main.py`
 ```text
 from app.routes import products
 app.include_router(products.router)
@@ -454,5 +454,40 @@ app.include_router(products.router)
 uvicorn app.main:app --reload
 http://127.0.0.1:8000/products/
 ```
+
+- Output expected:
+```text
+[
+  {
+    "id": 1,
+    "name": "Custom Mug",
+    "description": "Personalized ceramic mug with custom text.",
+    "base_price": 12.99,
+    "stock": 50
+  },
+  {
+    "id": 2,
+    "name": "Custom T-Shirt",
+    "description": "Cotton t-shirt with printed custom design.",
+    "base_price": 24.99,
+    "stock": 30
+  },
+  {
+    "id": 3,
+    "name": "Custom Notebook",
+    "description": "Personalized notebook for school or office use.",
+    "base_price": 9.99,
+    "stock": 100
+  }
+]
+```
+- push to GitHub
+```bash
+git add README.MD app\main.py app\routes\products.py
+git commit -m "Add products API route"
+git push -u origin feature/products-route
+```
+
+
 ---
 ### 6- Frontend setup
