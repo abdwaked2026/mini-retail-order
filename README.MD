@@ -515,9 +515,75 @@ app.include_router(customers.router)
 - Run and test
 ```bash
 uvicorn app.main:app --reload
-http://127.0.0.1:8000/products/
+http://127.0.0.1:8000/customers/
 ```
 
 - Output expected:
 ```text
+[
+  {
+    "id": 1,
+    "name": "Bob Alex",
+    "email": "bob@example.com",
+    "company_name": "Bob Designs",
+    "created_at": "2026-05-24 12:53:10"
+  },
+  {
+    "id": 2,
+    "name": "Omar Ali",
+    "email": "omar@example.com",
+    "company_name": "Omar Retail Co.",
+    "created_at": "2026-05-24 12:53:10"
+  },
+  {
+    "id": 3,
+    "name": "Sara John",
+    "email": "sara@example.com",
+    "company_name": null,
+    "created_at": "2026-05-24 12:53:10"
+  }
+]
+```
+- push to GitHub
+```bash
+git add README.MD app\main.py app\routes\customers.py
+git commit -m "Add customers API route"
+git push -u origin feature/customers-route
+```
+
+### 5-9 Create GET /orders/ Route
+- Update local main
+```bash
+git checkout main
+git pull origin main
+```
+
+- Create a new branch
+```bash
+git checkout -b feature/orders-route
+```
+
+- Update `app/routes/orders.py`
+```text
+router = APIRouter(prefix="/orders", tags=["Orders"])
+```
+- Update `app/main.py`
+```text
+from app.routes import customers, products, orders
+app.include_router(orders.router)
+```
+
+- Run and test
+```bash
+uvicorn app.main:app --reload
+http://127.0.0.1:8000/orders/
+```
+
+- Output expected:
+```text
+
+```
+- push to GitHub
+```bash
+```
 ### 6- Frontend setup
