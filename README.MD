@@ -581,9 +581,101 @@ http://127.0.0.1:8000/orders/
 
 - Output expected:
 ```text
-
+[
+  {
+    "id": 1,
+    "customer_id": 1,
+    "product_id": 1,
+    "custom_text": "Best Teacher Ever",
+    "quantity": 2,
+    "special_instructions": "Use blue text if possible.",
+    "status": "Pending",
+    "created_at": "2026-05-24 12:53:10"
+  },
+  {
+    "id": 2,
+    "customer_id": 2,
+    "product_id": 2,
+    "custom_text": "Omar Retail Team",
+    "quantity": 5,
+    "special_instructions": "Need all shirts in size medium.",
+    "status": "Processing",
+    "created_at": "2026-05-24 12:53:10"
+  },
+  {
+    "id": 3,
+    "customer_id": 3,
+    "product_id": 3,
+    "custom_text": "Sara Notes",
+    "quantity": 3,
+    "special_instructions": null,
+    "status": "Completed",
+    "created_at": "2026-05-24 12:53:10"
+  }
+]
 ```
 - push to GitHub
 ```bash
+git add app\main.py app\routes\orders.py README.MD
+git commit -m "Add orders API route"
+git push -u origin feature/orders-route
+```
+
+### 5-10 Improve GET /orders/ with JOIN
+- Update local main
+```bash
+git checkout main
+git pull origin main
+```
+
+- Create a new branch
+```bash
+git checkout -b feature/orders-details-route
+```
+
+- Update `app/routes/orders.py`
+```text
+change select statement with JOIN
+```
+- Run and test
+```bash
+uvicorn app.main:app --reload
+http://127.0.0.1:8000/orders/
+```
+
+- Output expected:
+```text
+[
+  {
+    "id": 1,
+    "customer_name": "Bob Alex",
+    "product_name": "Custom Mug",
+    "quantity": 2,
+    "base_price": 12.99,
+    "total_price": 25.98
+  },
+  {
+    "id": 2,
+    "customer_name": "Omar Ali",
+    "product_name": "Custom T-Shirt",
+    "quantity": 5,
+    "base_price": 24.99,
+    "total_price": 124.95
+  },
+  {
+    "id": 3,
+    "customer_name": "Sara John",
+    "product_name": "Custom Notebook",
+    "quantity": 3,
+    "base_price": 9.99,
+    "total_price": 29.97
+  }
+]
+```
+- push to GitHub
+```bash
+git add app\routes\orders.py README.MD
+git commit -m "Improve orders route with customer and product details"
+git push -u origin feature/orders-details-route
 ```
 ### 6- Frontend setup
