@@ -1,11 +1,17 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles # For serving static files like CSS and JavaScript
 from app.database import get_db_connection
-from app.routes import products,customers,orders
+from app.routes import products,customers,orders, pages
 
 app = FastAPI(title="Mini Retail Order API")
+# Mount the "app/static" directory to serve static files at the "/static" URL path
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+
 app.include_router(products.router)
 app.include_router(customers.router)
 app.include_router(orders.router)
+app.include_router(pages.router)
 
 # Test endpoint to verify that the API is running
 @app.get("/")

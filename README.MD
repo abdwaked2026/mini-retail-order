@@ -795,4 +795,145 @@ git add app\routes\orders.py README.MD
 git commit -m "Add create order API route"
 git push -u origin feature/create-order-route
 ```
+
+### 5-12 Create GET /orders/{order_id} Route
+- Update local main
+```bash
+git checkout main
+git pull origin main
+```
+
+- Create a new branch
+```bash
+git checkout -b feature/get-order-by-id
+```
+
+- Update `app/routes/orders.py`
+This route allows the API to return one specific order by its ID.
+It checks that:
+
+the order exists
+if the order does not exist, it returns 404 Order not found
+the response includes customer name, product name, quantity, status, base price, total price, and created date
+Add this route in app/routes/orders.py
+
+- Run and test
+```bash
+uvicorn app.main:app --reload
+http://127.0.0.1:8000/docs/
+```
+```bash
+http://127.0.0.1:8000/orders/1
+```
+output expected:
+```text
+{
+  "id": 1,
+  "customer_name": "Bob Alex",
+  "product_name": "Custom Mug",
+  "custom_text": "Best Teacher Ever",
+  "quantity": 2,
+  "special_instructions": "Use blue text if possible.",
+  "status": "Pending",
+  "base_price": 12.99,
+  "total_price": 25.98,
+  "created_at": "2026-05-24 12:53:10"
+}
+```
+```bash
+http://127.0.0.1:8000/orders/999
+```
+
+- Output expected:
+```text
+{"detail":"Order not found"}
+```
+- push to GitHub
+```bash
+git add app\routes\orders.py README.MD
+git commit -m "Add get order by id route"
+git push -u origin feature/get-order-by-id
+```
 ### 6- Frontend setup
+#### 6-1 Create Frontend Pages Branch
+The goal of this step is to create simple frontend pages using Jinja2 templates, HTML, CSS, and JavaScript.
+
+The frontend allows the user to:
+
+- Create a new order from the `/add-order` page.
+- Select an existing customer.
+- Select an available product.
+- Enter custom order text.
+- Enter quantity and optional special instructions.
+- Submit the order using JavaScript `fetch()`.
+- View all orders from the `/orders-page` page.
+- Search for one order by order ID.
+
+## Steps Completed
+
+1. Created a `pages.py` route file for frontend pages.
+2. Added Jinja2 template rendering with `TemplateResponse`.
+3. Mounted the static folder in `main.py`.
+4. Created a shared `base.html` layout.
+5. Created the `/add-order` page.
+6. Created the `/orders-page` page.
+7. Added JavaScript for loading customers and products.
+8. Added JavaScript for creating new orders.
+9. Added JavaScript for displaying and searching orders.
+10. Added CSS styling for forms, buttons, cards, and messages.
+
+
+- Create a new branch
+
+```bash
+git checkout main
+git pull origin main
+git checkout -b feature/frontend-order-pages
+```
+
+- jinja2 helps you reuse HTML layouts and display Python/FastAPI data dynamically on web pages.
+- Add `jinja2==3.1.6` to requirements.txt
+- Run
+```bash
+pip install -r requirements.txt
+```
+
+- Create:
+```bash
+mkdir app\templates
+mkdir app\static\css
+mkdir app\static\js
+
+type nul > app\routes\pages.py
+type nul > app\templates\base.html
+type nul > app\templates\add_order.html
+type nul > app\templates\orders.html
+type nul > app\static\css\style.css
+type nul > app\static\js\add_order.js
+type nul > app\static\js\orders.js
+```
+
+- Add page routes In `app/routes/pages.py`
+/add-order
+/orders-page
+
+## Frontend Screenshots
+
+### Add Order Page
+
+The `/add-order` page allows the user to create a new order by selecting a customer, selecting a product, entering custom text, choosing a quantity, and adding optional special instructions.
+
+![Add Order Page](docs/screenshots/add-order-page.png)
+
+### Orders Page
+
+The `/orders-page` page displays all orders and allows the user to search for a specific order by order ID.
+
+![Orders Page](docs/screenshots/orders-page.png)
+
+```bash
+git add README.MD app\main.py requirements.txt app\routes\pages.py app\templates app\static
+git commit -m "Add frontend order pages"
+git push -u origin feature/frontend-order-pages
+
+```
