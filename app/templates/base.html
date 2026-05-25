@@ -1,0 +1,37 @@
+/*
+ * Base HTML template for the Mini Retail Order application.
+ * This template defines the overall structure of the web pages, including the header and navigation.
+ * Other templates will extend this base template and fill in the content blocks.
+ */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %}Mini Retail Order{% endblock %}</title>
+
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <div>
+                <p class="eyebrow">Mini Retail Portal</p>
+                <h1>{% block page_heading %}Retail Ordering System{% endblock %}</h1>
+            </div>
+
+            <nav class="nav-links">
+                <a href="/add-order">Add Order</a>
+                <a href="/orders-page">Orders</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-wrapper">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
