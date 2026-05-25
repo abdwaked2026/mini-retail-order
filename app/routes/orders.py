@@ -40,6 +40,41 @@ def get_orders():
 
     return [dict(order) for order in orders]
 
+# Endpoint to get order by ID
+@router.get("/{order_id}")
+def get_order_by_id(order_id: int):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT
+            orders.id,
+            customers.name AS customer_name,
+            products.name AS product_name,
+            orders.custom_text,
+            orders.quantity,
+            orders.special_instructions,
+            orders.status,
+            products.base_price,
+            orders.quantity * products.base_price AS total_price,
+            orders.created_at
+        FROM orders
+        JOIN customers ON orders.customer_id = customers.id
+        JOIN products ON orders.product_id = products.id
+        WHERE orders.id = ?;
+        """,
+        (order_id,),
+    )
+
+    order = cursor.fetchone()
+    connection.close()
+
+    if order is None:
+        raise HTTPException(status_code=404, detail="Order not found")
+
+    return dict(order)
+
 # Endpoint to create a new order
 @router.post("/")
 def create_order(order: OrderCreate):

@@ -736,4 +736,63 @@ git add app\routes\orders.py README.MD
 git commit -m "Add create order API route"
 git push -u origin feature/create-order-route
 ```
+
+### 5-12 Create GET /orders/{order_id} Route
+- Update local main
+```bash
+git checkout main
+git pull origin main
+```
+
+- Create a new branch
+```bash
+git checkout -b feature/get-order-by-id
+```
+
+- Update `app/routes/orders.py`
+This route allows the API to return one specific order by its ID.
+It checks that:
+
+the order exists
+if the order does not exist, it returns 404 Order not found
+the response includes customer name, product name, quantity, status, base price, total price, and created date
+Add this route in app/routes/orders.py
+
+- Run and test
+```bash
+uvicorn app.main:app --reload
+http://127.0.0.1:8000/docs/
+```
+```bash
+http://127.0.0.1:8000/orders/1
+```
+output expected:
+```text
+{
+  "id": 1,
+  "customer_name": "Bob Alex",
+  "product_name": "Custom Mug",
+  "custom_text": "Best Teacher Ever",
+  "quantity": 2,
+  "special_instructions": "Use blue text if possible.",
+  "status": "Pending",
+  "base_price": 12.99,
+  "total_price": 25.98,
+  "created_at": "2026-05-24 12:53:10"
+}
+```
+```bash
+http://127.0.0.1:8000/orders/999
+```
+
+- Output expected:
+```text
+{"detail":"Order not found"}
+```
+- push to GitHub
+```bash
+git add app\routes\orders.py README.MD
+git commit -m "Add create order API route"
+git push -u origin feature/create-order-route
+```
 ### 6- Frontend setup
