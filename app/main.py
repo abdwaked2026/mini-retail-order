@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from app.database import get_db_connection
-from app.routes import products,customers
+from app.routes import products,customers,orders
 
 app = FastAPI(title="Mini Retail Order API")
 app.include_router(products.router)
 app.include_router(customers.router)
+app.include_router(orders.router)
+
 # Test endpoint to verify that the API is running
 @app.get("/")
 def read_root():
