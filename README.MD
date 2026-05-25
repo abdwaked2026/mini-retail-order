@@ -678,4 +678,62 @@ git add app\routes\orders.py README.MD
 git commit -m "Improve orders route with customer and product details"
 git push -u origin feature/orders-details-route
 ```
+
+### 5-11 Create POST /orders/ Route
+- Update local main
+```bash
+git checkout main
+git pull origin main
+```
+
+- Create a new branch
+```bash
+git checkout -b feature/create-order-route
+```
+
+- Update `app/routes/orders.py`
+This route allows the API to create a new order. It checks that:
+- the quantity is greater than 0
+- the customer exists
+- the product exists
+- enough stock is available
+- the order is inserted into the orders table
+- the product stock_quantity is reduced
+
+- Run and test
+```bash
+uvicorn app.main:app --reload
+http://127.0.0.1:8000/docs/
+```
+- Find `POST /orders/`
+- Click `Try it out`
+- Write JSON 
+```text
+{
+  "customer_id": 1,
+  "product_id": 1,
+  "custom_text": "Aisha's Mug",
+  "quantity": 2,
+  "special_instructions": "Use blue text"
+}
+```
+- Output expected:
+```text
+{
+  "message": "Order created successfully",
+  "order_id": 5,
+  "customer_id": 1,
+  "product_id": 1,
+  "custom_text": "Aisha's Mug",
+  "quantity": 2,
+  "special_instructions": "Use blue text",
+  "status": "pending"
+}
+```
+- push to GitHub
+```bash
+git add app\routes\orders.py README.MD
+git commit -m "Add create order API route"
+git push -u origin feature/create-order-route
+```
 ### 6- Frontend setup
