@@ -858,9 +858,23 @@ type nul > app\static\js\orders.js
 /add-order
 /orders-page
 
+## Frontend Screenshots
+
+### Add Order Page
+
+The `/add-order` page allows the user to create a new order by selecting a customer, selecting a product, entering custom text, choosing a quantity, and adding optional special instructions.
+
+![Add Order Page](docs/screenshots/add-order-page.png)
+
+### Orders Page
+
+The `/orders-page` page displays all orders and allows the user to search for a specific order by order ID.
+
+![Orders Page](docs/screenshots/orders-page.png)
 
 ```bash
-git status
-git add README.MD app\templates\base.html app\static\css\style.css
-git commit -m "Enhance frontend design and update README notes"
+git add README.MD app\main.py requirements.txt app\routes\pages.py app\templates app\static
+git commit -m "Add frontend order pages"
+git push -u origin feature/frontend-order-pages
+
 ```
